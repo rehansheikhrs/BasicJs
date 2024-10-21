@@ -40,3 +40,28 @@ const heros = ["IronMan", "Thor", "Dr. Stringe", "SpiderMan", "Gaurdians of Gala
     }
 
     console.log(typeof myFunction);
+
+
+    // Memory 
+    // Stack (Premetive), Heap(Non- Premetive)
+
+    let mychan = "Rehan Sheikh"
+
+    let anotherNmae = mychan
+
+    anotherNmae = "Rahil Sheikh"
+
+    console.log(anotherNmae);
+
+    // non -premetive
+
+    let userOne = {
+        name : "Rehan",
+        age :31,
+        email : "rehan@gmail.com"
+    }
+   let userTwo = userOne
+  userTwo.email = "rehan999@gmail.com";
+
+  console.log(userOne);
+  console.log(userTwo);

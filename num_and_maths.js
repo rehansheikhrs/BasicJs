@@ -47,7 +47,12 @@ const max = 20;
 // Math.random() * (max - min + 1) isse console log ke andar likhe lo  
 // but fir hum add karenge floor kyun ki hume bootom ki value chahiye aur hume last me min se + (add) karna honga
 // Kyun ki hame value 10 upar chahiye
-console.log(Math.floor(Math.random() * (max - min + 1) ) + 10);
+console.log(Math.floor(Math.random() * (max - min + 1) ) + min);
+
+// try it and practice 
+
+console.log(Math.floor(Math.random() * (max - min + 1) +min));
+
 
 
 

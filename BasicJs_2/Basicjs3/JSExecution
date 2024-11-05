@@ -1,0 +1,201 @@
+// **How does javascript execute code + call stack**
+ 
+ Js Execution --->
+
+ 1) Globla Execution Contex  //  yaha this use honga 
+ 2) Fucntion Execution Contex
+ 3) Eval Execution Contex
+
+
+// JS code ---> do phase me execute hota hai 
+1) Memory  **Creation Phase**  ---> // Memory creation phase me jo *varible* hote hai usme sirf Location (Jagahe) elocate ki jati hai ,but code ko execute nahi kiya jata 
+
+ Example-->
+                                            let val1 = 10
+                                            let val2 = 20
+
+                                            function addNum(num1,num2){
+                                                let total = num1+num2
+                                                return total
+                                            }
+                                            let result1 = addNum(val1,val2)
+                                            let result2 = addNum(18,3)
+
+
+code ko
+1) Globle Execution ke through Run hota hai
+aur isse * this* ke andar elocate kiya jata hai //  ye yaad rakhna
+
+
+
+
+//
+2) Memory Phase --> iss me saare variable ko ekktta kar ke rakha jata hai apne pass me jaise hum ne upar padhe the
+
+ iis me kiase kam honga --->
+
+  val1 = undefined
+  val2 = undefined 
+  addNum = defination // function ke name me jitan bhi 
+
+
+3) Execution Phase // Execution Phase ---> // yaha plus , minus, multiply jo bhi Math function vo ya ha hota hai
+
+a) val1 = 10
+b) val2 = 20 
+c) addNum ======> new variable enviroment + Execution thread // ya ha addNum ke liye phir se memory phase // aur Execution phase run honge // jab iss ka kam hojayega to ye Delete bhi hojayenge!
+
+Yaha 1)Memory Phase me --> val1 = undifined     2) Execution Phase --> num1 = 10     3) New Veriable Envnt.
+                         val2 = undefined                              num2 = 20       iis me ye dono Phase
+                         total = undefined                             total ==> 30    repeat honge
+                                                                                       Same dono process repeat honge aur vapase goble execution phase me jayenga
+
+
+
+                                            
+
+
+
+
+
+
+
+
+
+### // Read It ---->
+
+1. Global Execution Context (GEC)
+JavaScript mein jab bhi hum code run karte hain, sabse pehle ek Global Execution Context (GEC) create hota hai. Yeh wo environment hai jisme global variables aur functions define hote hain. JavaScript engine pehle GEC banata hai aur ismein sab kuch manage hota hai jo global scope mein hota hai.
+
+GEC do main phases mein kaam karta hai:
+
+Memory Creation Phase: Yeh phase Execution Context (GEC ya Function Execution) ke start mein hota hai.
+Code Execution Phase: Is phase mein actual code execute hota hai.
+Memory Creation Phase
+Jab bhi execution context create hota hai, sabse pehle memory creation hoti hai.
+Is phase mein JavaScript engine hoisting ka process karta hai. Variables aur functions ko memory mein jagah milti hai, lekin unke values assign nahi hote (except function declarations).
+Variables ko initially undefined set kiya jata hai aur function definitions memory mein as it is rakh di jati hain.
+Example:
+
+javascript
+Copy code
+console.log(greeting); // Output: undefined (due to hoisting)
+var greeting = "Hello, World!";
+console.log(greeting); // Output: "Hello, World!"
+Iss example mein:
+
+Memory Creation Phase: greeting variable ko undefined assign kiya gaya.
+Code Execution Phase: Jab console.log(greeting) pehli baar run hota hai, undefined print hota hai kyunki ab tak greeting me value assign nahi hui thi. Uske baad, greeting me "Hello, World!" assign hota hai aur dusri baar console.log(greeting) pe value print hoti hai.
+Code Execution Phase
+Is phase mein actual code line-by-line execute hota hai aur variables ko values assign ki jaati hain jo memory mein pehle se reserve hain.
+
+2. Function Execution Context (FEC)
+Jab bhi koi function call hota hai, uske liye ek naya Function Execution Context (FEC) create hota hai. FEC bhi same 2 phases mein divide hota hai:
+
+Memory Creation Phase: Function ke andar defined variables aur parameters ke liye memory allocate hoti hai aur unhe initial values assign hoti hain.
+Code Execution Phase: Phir function ke andar ka code line-by-line execute hota hai.
+Example:
+
+javascript
+Copy code
+function greet(name) {
+    var greeting = "Hello, " + name;
+    console.log(greeting);
+}
+
+greet("Rehan");
+Iss example mein:
+
+Jab greet("Rehan") call hota hai, ek new FEC create hota hai.
+Memory Creation Phase mein name aur greeting variables allocate hote hain (name ko "Rehan" assign hota hai).
+Code Execution Phase mein greeting ko assign kiya jata hai aur console.log execute hota hai, jo output deta hai "Hello, Rehan".
+Har function call pe ek naya FEC create hota hai jo temporary hota hai. Jab function ka kaam khatam hota hai, FEC stack se pop ho jata hai aur memory free ho jati hai.
+
+### // ## Call Stack --->
+
+ JavaScript Execution ka Overview
+JavaScript ek single-threaded language hai, jo synchronous aur asynchronous code ko handle kar sakti hai. Single-threaded ka matlab yeh hai ki JavaScript ek time mein sirf ek kaam kar sakti hai. Iska ek hi execution context hota hai, aur sari commands ek ke baad ek execute hoti hain.
+
+JavaScript ka engine (like V8 in Chrome) code ko execute karne ke liye kuch key components ka use karta hai:
+
+Call Stack: Yeh ek data structure hai jo ki synchronous functions ko track karta hai.
+Heap: Yeh wo jagah hai jahan memory allocate hoti hai objects aur data ke liye.
+Event Loop & Callback Queue: Yeh asynchronous code ko handle karte hain, jaise setTimeout, Promises, aur DOM events.
+Ab, hum focus karte hain Call Stack par, jo synchronous code ko execute karta hai.
+
+2. Call Stack kya hai?
+Call Stack ek LIFO (Last In, First Out) data structure hai jo functions ko manage karta hai. JavaScript me jab bhi koi function call hota hai, wo call stack me push ho jata hai, aur jab function execute ho jata hai, to wo stack se pop ho jata hai. Yeh structure ensure karta hai ki har function proper sequence me execute ho.
+
+Call Stack ka Basic Kaam
+Jab koi function call hota hai, to wo stack me add ho jata hai.
+Function ke andar jo bhi code likha hai, wo execute hota hai.
+Jaise hi function ka kaam khatam hota hai, wo call stack se remove ho jata hai.
+Agar hum example dekhen:
+
+javascript
+Copy code
+function greet() {
+    console.log("Hello, World!");
+}
+
+function start() {
+    greet();
+}
+
+start();
+Is code mein start() call ho raha hai, jo greet() function ko call karta hai. Chalo step-by-step dekhen ki call stack kaise work karega:
+
+start() Call hota hai: start function call stack me push ho jata hai.
+greet() Call hota hai: greet function ko start call karta hai, to ab greet bhi stack me push ho jata hai.
+console.log Execute hota hai: greet function console.log execute karta hai, jo Hello, World! print karta hai.
+greet() Pop ho jata hai: Jaise hi greet function ka kaam khatam hota hai, wo call stack se remove ho jata hai.
+start() Pop ho jata hai: greet ke baad, start function bhi khatam ho jata hai, aur call stack se pop ho jata hai.
+Ye sequence ensure karta hai ki pehle aaye, pehle execute ho aur proper order maintain rahe.
+
+3. Call Stack Errors: Stack Overflow
+Kabhi kabhi infinite recursion ya heavy nesting ke wajah se Stack Overflow ho sakta hai. Yeh tab hota hai jab call stack ek function ko repeatedly push karta hai aur memory limit cross kar jata hai.
+
+Example:
+
+javascript
+Copy code
+function recurse() {
+    recurse(); // function apne aap ko hi bar-bar call kar raha hai
+}
+
+recurse();
+Yahan recurse() apne aap ko repeat kar raha hai bina stop hue, jo ek error create karega: Maximum call stack size exceeded. Iska matlab hai ke call stack memory se bhar gaya.
+
+4. Asynchronous Code aur Call Stack
+JavaScript me asynchronous code ko handle karne ke liye Event Loop aur Callback Queue ka use hota hai. Jaise hi koi asynchronous operation (like setTimeout) encounter hota hai, wo call stack ko block nahi karta. Wo callback queue me queue hota hai aur event loop ensure karta hai ki wo tab execute ho jab call stack empty ho.
+
+Example:
+
+javascript
+Copy code
+console.log("Start");
+
+setTimeout(() => {
+    console.log("Timeout");
+}, 1000);
+
+console.log("End");
+Execution process:
+
+console.log("Start"): Call stack me push hota hai, execute hota hai aur pop ho jata hai. Output: Start
+setTimeout: Ye asynchronous hai, isliye yeh call stack ko block nahi karta, balki callback queue me add ho jata hai.
+console.log("End"): Yeh execute hota hai aur output deta hai: End
+Event Loop: Ab call stack empty hai, to event loop callback queue se setTimeout ka callback utha ke stack me push karta hai aur execute hota hai. Output: Timeout
+Final Output:
+
+sql
+Copy code
+Start
+End
+Timeout
+Summary
+Call Stack: JavaScript ka main component jo synchronous code ko manage karta hai.
+LIFO Structure: Last In, First Out; jo last call hota hai, wo pehle execute hota hai.
+Stack Overflow: Infinite recursion ya excessive calls ki wajah se hota hai.
+Asynchronous Handling: Event loop aur callback queue call stack ko block nahi hone dete aur asynchronous code ko manage karte hain.
+Ye overall concept clear karta hai ke JavaScript kis tarah se code ko execute karta hai aur kis tarah se synchronous aur asynchronous code handle hota hai.

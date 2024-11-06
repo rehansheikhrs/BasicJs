@@ -1,0 +1,91 @@
+// File Itteration Or Loop
+
+// For
+
+// for (let i = 0; i <= 10; i++) {
+//     const element = i;
+
+//     if(element == 5){
+//         console.log("The Best Number is 5");
+        
+//     }
+
+//     console.log(element);
+    
+    
+// }
+
+// another condition
+
+// for (let i = 1; i <= 10 ; i++) {
+
+//     console.log(`Outer Loop Value: ${i}`);
+
+//     for (let j = 1; j <= 10; j++) {
+//         // console.log(`Inner loop Value is ${j} and inner Value is ${i}`);
+        
+//         console.log(`${i} * ${j} = ${i*j}`);
+        
+        
+//     }
+    
+    
+// }
+
+// myArray
+
+// const myArray = ["IronMan","Thor", "Hulk"];
+
+// for (let i = 0; i < myArray.length; i++) {
+//     const element = myArray[i];
+//     console.log(`Super Heros : ${element}`);
+    
+    
+// }
+
+// Break and continue // isse hum use kar skte hai jab hum 10 me se sirg 5 hi execute karna ho
+
+// for (let i = 0; i <= 20; i++) {
+   
+//     if(i == 5){
+//         console.log("Detected 5");
+        
+//     } else if (i == 10) {
+//         console.log("Detected 10");
+        
+//     }else if(i==15){
+//         console.log("Detected 15");
+//         break;                                // Humne jaha par break laga diya waha se loop bahar aajayenga
+        
+//     }else if(i==20){
+//         console.log("Detected 20");
+        
+//     }
+
+//     console.log(`Value of index is : ${i}`);
+    
+    
+// }
+
+for (let i = 0; i <= 20; i++) {
+   
+    if(i == 5){
+        console.log("Detected 5");
+        continue;
+    } 
+    // } else if (i == 10) {
+    //     console.log("Detected 10");
+        
+    // }else if(i==15){
+    //     console.log("Detected 15");
+    //     continue;                                // Humne jaha par break laga diya waha se loop bahar aajayenga
+        
+    // }else if(i==20){
+    //     console.log("Detected 20");
+        
+    // }
+
+    console.log(`Value of index is : ${i}`);
+    
+    
+}
